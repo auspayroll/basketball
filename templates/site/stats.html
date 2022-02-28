@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<table>
+    <tr><th>Name</th>
+        <th>login count</th>
+        <th>total time</th>
+        <th>status</th>
+    </tr>
+{% for profile in profiles %}
+    <tr>
+        <td>{{ profile }} </td>
+        <td>{{ profile.login_count }}</td>
+        <td>{{ profile.total_time }}</td>
+        <td>{{ profile.status.1 }}</td>
+
+    </tr>
+{% endfor %}
+</table>
+{% endblock %}

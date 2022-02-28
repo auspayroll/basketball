@@ -1,0 +1,32 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Matific Basketball League{% endblock %}
+
+{% block branding %}
+<h1 id="site-name"><a href="">Matific Basketball League</a></h1>
+{% endblock %}
+
+{% block breadcrumbs %}
+{% if request.user.is_authenticated %}
+<div class="breadcrumbs">
+<a href="{% url 'scoreboard' %}">Scoreboard</a> | 
+
+{% if perms.league.view_profile  %}
+    <a href="{% url 'stats' %}">Site stats</a> |
+{% endif %}
+
+{% if perms.league.view_team and user.profile.team_id %}
+    <a href="{% url 'team' user.profile.team_id %}">Players</a>
+{% endif %}
+
+<form action="{% url 'league_logout' %}" 
+      method="post" 
+      style="margin:0; padding:0;display:inline">
+    {% csrf_token %}
+    <button style="float:right">Logout</button>
+</form>
+
+</div>
+{% endif %}
+
+{% endblock %}

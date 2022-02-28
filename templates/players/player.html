@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<fieldset class="module aligned">
+    <h2>Personal Info</h2>
+<div class="form-row">
+    <label>Name</label>: {{ player.name }}
+</div>
+<div class="form-row">
+    <label>Height</label>: {{ player.height }} cm
+</div>
+<div class="form-row">
+    <label>Average Score</label>: {{ player.average_score }}
+</div>
+<div class="form-row">
+    <label>Total Games</label>: {{ player.total_games }}
+</div>
+</fieldset>
+    
+
+</div>
+{% endblock %}

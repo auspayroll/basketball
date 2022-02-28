@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load my_filters %}
+
+{% for i in season.current_round %}
+    <a href="{% url 'round' season.pk i %}">Round { i+1 }</a> | 
+{% endfor %}
+
+{% block content %}
+{% for i in season.current_round|times %}
+    <a href="{% url 'round' season.pk i %}">Round {{ i }}</a> | 
+{% endfor %}
+
+<table>
+    <tr><th>Game</th>
+        <th>Date</th>
+        <th>Score</th>
+        <th>Winner</th>
+    </tr>
+{% for game in games %}
+    <tr>
+        <td>
+            <!--
+            <a href="{% url 'team' game.teamgame_set.first.team.pk %}">{{ game.teamgame_set.first.team.name }}</a>
+                -vs-
+            <a href="{% url 'team' game.teamgame_set.last.team.pk %}">{{ game.teamgame_set.last.team.name }}</a>
+            -->
+            <a href="{% url 'game' game.pk %}">{{ game }}</a>
+        </td>
+        <td>{{ game.when }}</td>
+        <td>{% if game.winner %}{{ game.score }}
+            {% else %}
+            -
+            {% endif %}
+        </td>
+        <td>{% if game.winner %}<a href="{% url 'team' game.winner.pk %}">{{ game.winner }}</a>
+            {% else %}-{% endif %}
+        </td>
+    </tr>
+{% endfor %}
+</table>
+{% endblock %}

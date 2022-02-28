@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div>
+    {% for team_game in team_games %}
+    <div>
+            {% if perms.league.change_player or perms.league.view_player and user.profile.team_id == team_game.team_id %}
+                <h2><a href="{% url 'team' team_game.team.pk %}">{{ team_game.team.name }}</a></h2>
+            {% else %}
+                <h2>{{ team_game.team.name }}</h2>
+            {% endif %}
+            
+        <table>
+            <tr><th>Player</th><th>Score</th></tr>
+        {% for player_game in team_game.playergame_set.all %}
+            <tr><td>
+                    {% if perms.league.change_player or perms.league.view_player and user.profile.team_id == player_game.team_game.team_id %}
+                        <a href="{% url 'player' player_game.player.pk %}">{{ player_game.player }}</a>
+                    {% else %}
+                        {{ player_game.player }}
+                    {% endif %}
+                </td>
+                <td>{{ player_game.score }}</td>
+            </tr>
+        {% endfor %}
+        </table>
+    </div>
+    {% endfor %}
+</div>
+
+
+{% endblock %}

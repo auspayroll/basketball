@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<a href="{% url 'team' team.pk %}">All members</a> | <a href="{% url 'team_percentile' team.pk 90 %}">90% Percentile</a>
+
+<div style="margin: 10px 0 10px 0;">
+    <div class="form-row">
+        <label>Average Score</label>: {{ team.average_score }}
+    </div>
+    <div class="form-row">
+        <label>Total Games</label>: {{ team.total_games }}
+    </div>
+</div>
+
+<table>
+    <tr><th>Name</th>
+        <th>Height (cm)</th>
+        <th>Average Score</th>
+        <th>Total Games</th>
+    </tr>
+{% for player in players %}
+    <tr>
+        <td><a href="{% url 'player' player.pk %}">{{player}}</a></td>
+        <td>{{ player.height }}</td>
+        <td>{{ player.average_score }}</td>
+        <td>{{ player.total_games }}</td>
+    </tr>
+{% endfor %}
+</table>
+{% endblock %}
